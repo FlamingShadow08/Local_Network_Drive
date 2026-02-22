@@ -19,7 +19,9 @@ Pouya Drive is a lightweight, private file storage and sharing solution you can 
 
 ### Screenshots
 
-*(Add 2–4 screenshots here – folder view on desktop, mobile view, upload progress, etc.)*
+<img width="1919" height="908" alt="image" src="https://github.com/user-attachments/assets/fb3165c7-f490-4a7e-97f6-d6a6b92c4746" />
+<img width="499" height="906" alt="image" src="https://github.com/user-attachments/assets/8022c5bc-fcf1-4d99-81db-9628b883f494" />
+
 
 ### Tech Stack
 - **Backend**: Flask
