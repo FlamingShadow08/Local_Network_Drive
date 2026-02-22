@@ -1,0 +1,214 @@
+* {
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: radial-gradient(circle at top, #141824, #0b0e14);
+    color: white;
+    min-height: 100vh;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    background: rgba(20, 24, 36, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #222;
+    z-index: 100;
+}
+
+header .left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+header .title {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+header button,
+header .icon {
+    background: #1f2435;
+    border: none;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.15s;
+}
+
+header button:hover,
+header .icon:hover {
+    background: #2a3050;
+}
+
+header .icon {
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.card {
+    background: linear-gradient(145deg, #1a2032, #131826);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.18s ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+    max-width: 100%;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(145deg, #212853, #161b33);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+}
+
+.card a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.folder a {
+    font-weight: 700;
+}
+
+.file span {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+    direction: ltr;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.actions button {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px 8px;
+}
+
+.actions button:hover {
+    color: white;
+}
+
+.delete {
+    background: transparent;
+    border: none;
+    color: #ff5f5f;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+.delete:hover {
+    color: #ff2f2f;
+}
+
+.empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    opacity: 0.45;
+    font-size: 1.5rem;
+    margin: 100px 20px;
+}
+
+#progressOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.progressBox {
+    background: linear-gradient(145deg, #1b2140, #11162a);
+    padding: 28px;
+    border-radius: 16px;
+    width: min(360px, 90%);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+#progressText {
+    margin-bottom: 16px;
+    font-size: 1.05rem;
+    opacity: 0.9;
+}
+
+.bar {
+    width: 100%;
+    height: 10px;
+    background: #2a3050;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+#progressFill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #4f7cff, #6fb1ff);
+    transition: width 0.2s ease;
+}
+
+/* Mobile-first responsive layout */
+@media (max-width: 680px) {
+    main {
+        grid-template-columns: 1fr;
+        padding: 16px 12px;
+        gap: 12px;
+    }
+
+    .card {
+        padding: 12px 14px;
+    }
+
+    header {
+        padding: 10px 14px;
+    }
+
+    header button {
+        padding: 7px 12px;
+        font-size: 13px;
+    }
+
+    .file span,
+    .folder a {
+        max-width: 24ch;          /* roughly 24–26 visible chars on mobile */
+    }
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pouya Drive</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+    <div class="left">
+        {% if path %}
+        <a class="icon" href="/?path={{ parent }}">← Back</a>
+        {% endif %}
+        <span class="title">Pouya Drive</span>
+    </div>
+    <div class="right">
+        <button onclick="newFolder()">📁 New Folder</button>
+        <button onclick="upload()">⬆️ Upload</button>
+    </div>
+</header>
+
+<main>
+    {% if items|length == 0 %}
+        <div class="empty">📂 This folder is empty</div>
+    {% else %}
+        {% for item in items %}
+            {% if item.is_dir %}
+                <div class="card folder">
+                    <a href="/?path={{ (path + '/' if path else '') + item.name | urlencode }}">
+                        📁 {{ item.name }}
+                    </a>
+                    <button class="delete" onclick="confirmDelete('{{ item.name | e }}')">✖</button>
+                </div>
+            {% else %}
+                <div class="card file">
+                    <span>📄 {{ item.name }}</span>
+                    <div class="actions">
+                        <button onclick="downloadFile('{{ item.name | e }}')">⬇ Download</button>
+                        <button class="delete" onclick="confirmDelete('{{ item.name | e }}')">✖</button>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</main>
+
+<!-- Progress overlay -->
+<div id="progressOverlay" style="display: none;">
+    <div class="progressBox">
+        <div id="progressText">Transfer in progress…</div>
+        <div class="bar">
+            <div id="progressFill"></div>
+        </div>
+    </div>
+</div>
+
+<form id="uploadForm" hidden>
+    <input id="fileInput" type="file" multiple>
+</form>
+
+<form id="folderForm" method="post" hidden>
+    <input id="folderInput" type="text" name="folder">
+</form>
+
+<form id="deleteForm" method="post" action="/delete" hidden>
+    <input id="deletePath" type="hidden" name="path" value="{{ path }}">
+    <input id="deleteName" type="hidden" name="name">
+</form>
+
+<script>
+    const CURRENT_PATH = {{ path | tojson }};
+</script>
+<script src="/static/app.js"></script>
+</body>
+</html>
